@@ -41,4 +41,20 @@ describe("parseVerdict", () => {
     }, players)).toThrow();
     expect(() => parseVerdict({ ...good, championPlayerId: "p9" }, players)).toThrow();
   });
+
+  it("maps display names to player ids and record strings to wins", () => {
+    const named = {
+      records: [
+        { playerId: "Berny", record: "13-4", paragraph: "Why A", strength: "WRs", hole: "QB", playerToWatch: "Bijan" },
+        { playerId: "Andres", wins: "15", paragraph: "Why B", strength: "QB", hole: "WR1", playerToWatch: "Mahomes" },
+      ],
+      championPlayerId: "Andres",
+      tiebreakLine: "QB",
+    };
+    const v = parseVerdict(named, players, ["Berny", "Andres"]);
+    expect(v.records[0].playerId).toBe("p0");
+    expect(v.records[0].wins).toBe(13);
+    expect(v.records[1].wins).toBe(15);
+    expect(v.championPlayerId).toBe("p1");
+  });
 });

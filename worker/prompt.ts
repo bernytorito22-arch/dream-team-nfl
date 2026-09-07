@@ -15,7 +15,7 @@ export function revealPrompt(dreamTeams: {
     "Each roster is a 9-slot dream team. Predict a 17-game record (wins 0-17).",
     "Winner is closest to 17-0 (most wins). If wins tie, still pick championPlayerId and write tiebreakLine.",
     "Return ONLY compact JSON, no markdown, no commentary. Keys: records (array), championPlayerId, tiebreakLine.",
-    "Each record: playerId, wins (integer), paragraph (1-2 short sentences), strength (max 6 words), hole (max 6 words), playerToWatch (a name).",
+    "Each record: playerId MUST be the bracket id (p0, p1, …) not the display name, wins (integer 0-17), paragraph (1-2 short sentences), strength (max 6 words), hole (max 6 words), playerToWatch (a name).",
     "Keep the whole response under 900 words.",
     "",
     boards,

@@ -1,6 +1,9 @@
 import { SCORE_ERROR } from "../src/ai/client";
+import { extractJson, modelText } from "../src/ai/extractModel";
 import { parseVerdict } from "../src/ai/parseVerdict";
 import { revealPrompt } from "./prompt";
+
+export const REVEAL_MODEL = "@cf/zai-org/glm-4.7-flash";
 
 export type Env = {
   ASSETS: { fetch: (request: Request) => Promise<Response> };
@@ -9,23 +12,16 @@ export type Env = {
       model: string,
       input: {
         messages: { role: string; content: string }[];
-        reasoning_effort?: "low" | "medium" | "high";
+        chat_template_kwargs?: { enable_thinking?: boolean };
+        response_format?: { type: string };
         max_tokens?: number;
       },
     ) => Promise<{
       response?: string;
-      choices?: { message?: { content?: string } }[];
+      choices?: { message?: { content?: string | { text?: string }[] } }[];
     }>;
   };
 };
-
-function extractJson(text: string): unknown {
-  const start = text.indexOf("{");
-  const end = text.lastIndexOf("}");
-  if (start < 0 || end < 0)
-    throw new Error(`no json in: ${text.slice(0, 200)}`);
-  return JSON.parse(text.slice(start, end + 1));
-}
 
 export async function handleReveal(request: Request, env: Env): Promise<Response> {
   if (request.method !== "POST") {
@@ -36,15 +32,23 @@ export async function handleReveal(request: Request, env: Env): Promise<Response
       dreamTeams: { playerId: string; name: string; slots: { slotId: string; assetName: string; teamName: string }[] }[];
     };
     const playerIds = body.dreamTeams.map((d) => d.playerId);
-    const result = await env.AI.run("@cf/zai-org/glm-4.7-flash", {
-      messages: [{ role: "user", content: revealPrompt(body.dreamTeams) }],
-      reasoning_effort: "low",
-      max_tokens: 8192,
-    });
-    const raw = String(
-      result.response ?? result.choices?.[0]?.message?.content ?? "",
-    );
-    const verdict = parseVerdict(extractJson(raw), playerIds);
+    const displayNames = body.dreamTeams.map((d) => d.name);
+    const messages = [{ role: "user", content: revealPrompt(body.dreamTeams) }];
+    const baseInput = {
+      messages,
+      chat_template_kwargs: { enable_thinking: false } as const,
+      max_tokens: 2048,
+    };
+    let result: Awaited<ReturnType<Env["AI"]["run"]>>;
+    try {
+      result = await env.AI.run(REVEAL_MODEL, {
+        ...baseInput,
+        response_format: { type: "json_object" },
+      });
+    } catch {
+      result = await env.AI.run(REVEAL_MODEL, baseInput);
+    }
+    const verdict = parseVerdict(extractJson(modelText(result)), playerIds, displayNames);
     return Response.json({ ok: true, verdict });
   } catch {
     return Response.json({ ok: false, error: SCORE_ERROR }, { status: 502 });
