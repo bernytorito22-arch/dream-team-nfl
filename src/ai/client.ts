@@ -33,7 +33,7 @@ export async function fetchReveal(
   dreamTeams: DreamTeam[],
   league: League,
   customAssets: LeagueAsset[] = [],
-  signal: AbortSignal = AbortSignal.timeout(20_000),
+  signal: AbortSignal = AbortSignal.timeout(55_000),
 ): Promise<RevealResult> {
   try {
     const res = await fetch("/api/reveal", {
@@ -52,6 +52,7 @@ export async function fetchReveal(
       verdict: parseVerdict(
         body.verdict,
         dreamTeams.map((d) => d.playerId),
+        dreamTeams.map((d) => d.name),
       ),
     };
   } catch {
