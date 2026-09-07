@@ -1,0 +1,582 @@
+{
+  "season": 2026,
+  "teams": [
+    {
+      "id": "ari",
+      "abbr": "ARI",
+      "name": "Arizona Cardinals",
+      "city": "Arizona",
+      "assets": [
+        { "id": "ari-qb-jacoby-brissett", "name": "Jacoby Brissett", "kind": "player", "group": "qb", "teamId": "ari" },
+        { "id": "ari-rb-jeremiyah-love", "name": "Jeremiyah Love", "kind": "player", "group": "rb", "teamId": "ari" },
+        { "id": "ari-wr-marvin-harrison-jr", "name": "Marvin Harrison Jr.", "kind": "player", "group": "wr", "teamId": "ari" },
+        { "id": "ari-wr-michael-wilson", "name": "Michael Wilson", "kind": "player", "group": "wr", "teamId": "ari" },
+        { "id": "ari-te-trey-mcbride", "name": "Trey McBride", "kind": "player", "group": "te", "teamId": "ari" },
+        { "id": "ari-defplayer-budda-baker", "name": "Budda Baker", "kind": "player", "group": "defPlayer", "teamId": "ari" },
+        { "id": "ari-defplayer-josh-sweat", "name": "Josh Sweat", "kind": "player", "group": "defPlayer", "teamId": "ari" },
+        { "id": "ari-def-unit", "name": "Cardinals Defense", "kind": "unit", "group": "def", "teamId": "ari" },
+        { "id": "ari-oline-unit", "name": "Cardinals O-line", "kind": "unit", "group": "oline", "teamId": "ari" },
+        { "id": "ari-coach-mike-lafleur", "name": "Mike LaFleur", "kind": "unit", "group": "coach", "teamId": "ari" }
+      ]
+    },
+    {
+      "id": "atl",
+      "abbr": "ATL",
+      "name": "Atlanta Falcons",
+      "city": "Atlanta",
+      "assets": [
+        { "id": "atl-qb-tua", "name": "Tua Tagovailoa", "kind": "player", "group": "qb", "teamId": "atl" },
+        { "id": "atl-rb-bijan", "name": "Bijan Robinson", "kind": "player", "group": "rb", "teamId": "atl" },
+        { "id": "atl-wr-london", "name": "Drake London", "kind": "player", "group": "wr", "teamId": "atl" },
+        { "id": "atl-wr-mooney", "name": "Darnell Mooney", "kind": "player", "group": "wr", "teamId": "atl" },
+        { "id": "atl-te-pitts", "name": "Kyle Pitts", "kind": "player", "group": "te", "teamId": "atl" },
+        { "id": "atl-defplayer-james-pearce-jr", "name": "James Pearce Jr.", "kind": "player", "group": "defPlayer", "teamId": "atl" },
+        { "id": "atl-defplayer-aj-terrell", "name": "A.J. Terrell", "kind": "player", "group": "defPlayer", "teamId": "atl" },
+        { "id": "atl-def-unit", "name": "Falcons Defense", "kind": "unit", "group": "def", "teamId": "atl" },
+        { "id": "atl-oline-unit", "name": "Falcons O-line", "kind": "unit", "group": "oline", "teamId": "atl" },
+        { "id": "atl-coach-stefanski", "name": "Kevin Stefanski", "kind": "unit", "group": "coach", "teamId": "atl" }
+      ]
+    },
+    {
+      "id": "bal",
+      "abbr": "BAL",
+      "name": "Baltimore Ravens",
+      "city": "Baltimore",
+      "assets": [
+        { "id": "bal-qb-lamar-jackson", "name": "Lamar Jackson", "kind": "player", "group": "qb", "teamId": "bal" },
+        { "id": "bal-rb-derrick-henry", "name": "Derrick Henry", "kind": "player", "group": "rb", "teamId": "bal" },
+        { "id": "bal-wr-zay-flowers", "name": "Zay Flowers", "kind": "player", "group": "wr", "teamId": "bal" },
+        { "id": "bal-wr-rashod-bateman", "name": "Rashod Bateman", "kind": "player", "group": "wr", "teamId": "bal" },
+        { "id": "bal-te-mark-andrews", "name": "Mark Andrews", "kind": "player", "group": "te", "teamId": "bal" },
+        { "id": "bal-defplayer-roquan-smith", "name": "Roquan Smith", "kind": "player", "group": "defPlayer", "teamId": "bal" },
+        { "id": "bal-defplayer-kyle-hamilton", "name": "Kyle Hamilton", "kind": "player", "group": "defPlayer", "teamId": "bal" },
+        { "id": "bal-def-unit", "name": "Ravens Defense", "kind": "unit", "group": "def", "teamId": "bal" },
+        { "id": "bal-oline-unit", "name": "Ravens O-line", "kind": "unit", "group": "oline", "teamId": "bal" },
+        { "id": "bal-coach-minter", "name": "Jesse Minter", "kind": "unit", "group": "coach", "teamId": "bal" }
+      ]
+    },
+    {
+      "id": "buf",
+      "abbr": "BUF",
+      "name": "Buffalo Bills",
+      "city": "Buffalo",
+      "assets": [
+        { "id": "buf-qb-josh-allen", "name": "Josh Allen", "kind": "player", "group": "qb", "teamId": "buf" },
+        { "id": "buf-rb-james-cook", "name": "James Cook", "kind": "player", "group": "rb", "teamId": "buf" },
+        { "id": "buf-wr-khalil-shakir", "name": "Khalil Shakir", "kind": "player", "group": "wr", "teamId": "buf" },
+        { "id": "buf-wr-dj-moore", "name": "DJ Moore", "kind": "player", "group": "wr", "teamId": "buf" },
+        { "id": "buf-te-dalton-kincaid", "name": "Dalton Kincaid", "kind": "player", "group": "te", "teamId": "buf" },
+        { "id": "buf-defplayer-terrel-bernard", "name": "Terrel Bernard", "kind": "player", "group": "defPlayer", "teamId": "buf" },
+        { "id": "buf-defplayer-greg-rousseau", "name": "Greg Rousseau", "kind": "player", "group": "defPlayer", "teamId": "buf" },
+        { "id": "buf-def-unit", "name": "Bills Defense", "kind": "unit", "group": "def", "teamId": "buf" },
+        { "id": "buf-oline-unit", "name": "Bills O-line", "kind": "unit", "group": "oline", "teamId": "buf" },
+        { "id": "buf-coach-brady", "name": "Joe Brady", "kind": "unit", "group": "coach", "teamId": "buf" }
+      ]
+    },
+    {
+      "id": "car",
+      "abbr": "CAR",
+      "name": "Carolina Panthers",
+      "city": "Carolina",
+      "assets": [
+        { "id": "car-qb-bryce-young", "name": "Bryce Young", "kind": "player", "group": "qb", "teamId": "car" },
+        { "id": "car-rb-chuba-hubbard", "name": "Chuba Hubbard", "kind": "player", "group": "rb", "teamId": "car" },
+        { "id": "car-wr-tetairoa-mcmillan", "name": "Tetairoa McMillan", "kind": "player", "group": "wr", "teamId": "car" },
+        { "id": "car-wr-jalen-coker", "name": "Jalen Coker", "kind": "player", "group": "wr", "teamId": "car" },
+        { "id": "car-te-tommy-tremble", "name": "Tommy Tremble", "kind": "player", "group": "te", "teamId": "car" },
+        { "id": "car-defplayer-jaelan-phillips", "name": "Jaelan Phillips", "kind": "player", "group": "defPlayer", "teamId": "car" },
+        { "id": "car-defplayer-devin-lloyd", "name": "Devin Lloyd", "kind": "player", "group": "defPlayer", "teamId": "car" },
+        { "id": "car-def-unit", "name": "Panthers Defense", "kind": "unit", "group": "def", "teamId": "car" },
+        { "id": "car-oline-unit", "name": "Panthers O-line", "kind": "unit", "group": "oline", "teamId": "car" },
+        { "id": "car-coach-canales", "name": "Dave Canales", "kind": "unit", "group": "coach", "teamId": "car" }
+      ]
+    },
+    {
+      "id": "chi",
+      "abbr": "CHI",
+      "name": "Chicago Bears",
+      "city": "Chicago",
+      "assets": [
+        { "id": "chi-qb-caleb", "name": "Caleb Williams", "kind": "player", "group": "qb", "teamId": "chi" },
+        { "id": "chi-rb-swift", "name": "D'Andre Swift", "kind": "player", "group": "rb", "teamId": "chi" },
+        { "id": "chi-wr-rome", "name": "Rome Odunze", "kind": "player", "group": "wr", "teamId": "chi" },
+        { "id": "chi-wr-luther-burden", "name": "Luther Burden III", "kind": "player", "group": "wr", "teamId": "chi" },
+        { "id": "chi-te-colston-loveland", "name": "Colston Loveland", "kind": "player", "group": "te", "teamId": "chi" },
+        { "id": "chi-defplayer-sweat", "name": "Montez Sweat", "kind": "player", "group": "defPlayer", "teamId": "chi" },
+        { "id": "chi-defplayer-grady-jarrett", "name": "Grady Jarrett", "kind": "player", "group": "defPlayer", "teamId": "chi" },
+        { "id": "chi-def-unit", "name": "Bears Defense", "kind": "unit", "group": "def", "teamId": "chi" },
+        { "id": "chi-oline-unit", "name": "Bears O-line", "kind": "unit", "group": "oline", "teamId": "chi" },
+        { "id": "chi-coach-johnson", "name": "Ben Johnson", "kind": "unit", "group": "coach", "teamId": "chi" }
+      ]
+    },
+    {
+      "id": "cin",
+      "abbr": "CIN",
+      "name": "Cincinnati Bengals",
+      "city": "Cincinnati",
+      "assets": [
+        { "id": "cin-qb-joe-burrow", "name": "Joe Burrow", "kind": "player", "group": "qb", "teamId": "cin" },
+        { "id": "cin-rb-chase-brown", "name": "Chase Brown", "kind": "player", "group": "rb", "teamId": "cin" },
+        { "id": "cin-wr-jamarr-chase", "name": "Ja'Marr Chase", "kind": "player", "group": "wr", "teamId": "cin" },
+        { "id": "cin-wr-tee-higgins", "name": "Tee Higgins", "kind": "player", "group": "wr", "teamId": "cin" },
+        { "id": "cin-te-mike-gesicki", "name": "Mike Gesicki", "kind": "player", "group": "te", "teamId": "cin" },
+        { "id": "cin-defplayer-trey-hendrickson", "name": "Trey Hendrickson", "kind": "player", "group": "defPlayer", "teamId": "cin" },
+        { "id": "cin-defplayer-logan-wilson", "name": "Logan Wilson", "kind": "player", "group": "defPlayer", "teamId": "cin" },
+        { "id": "cin-def-unit", "name": "Bengals Defense", "kind": "unit", "group": "def", "teamId": "cin" },
+        { "id": "cin-oline-unit", "name": "Bengals O-line", "kind": "unit", "group": "oline", "teamId": "cin" },
+        { "id": "cin-coach-taylor", "name": "Zac Taylor", "kind": "unit", "group": "coach", "teamId": "cin" }
+      ]
+    },
+    {
+      "id": "cle",
+      "abbr": "CLE",
+      "name": "Cleveland Browns",
+      "city": "Cleveland",
+      "assets": [
+        { "id": "cle-qb-deshaun-watson", "name": "Deshaun Watson", "kind": "player", "group": "qb", "teamId": "cle" },
+        { "id": "cle-rb-jerome-ford", "name": "Jerome Ford", "kind": "player", "group": "rb", "teamId": "cle" },
+        { "id": "cle-wr-jerry-jeudy", "name": "Jerry Jeudy", "kind": "player", "group": "wr", "teamId": "cle" },
+        { "id": "cle-wr-cedric-tillman", "name": "Cedric Tillman", "kind": "player", "group": "wr", "teamId": "cle" },
+        { "id": "cle-te-david-njoku", "name": "David Njoku", "kind": "player", "group": "te", "teamId": "cle" },
+        { "id": "cle-defplayer-jared-verse", "name": "Jared Verse", "kind": "player", "group": "defPlayer", "teamId": "cle" },
+        { "id": "cle-defplayer-denzel-ward", "name": "Denzel Ward", "kind": "player", "group": "defPlayer", "teamId": "cle" },
+        { "id": "cle-def-unit", "name": "Browns Defense", "kind": "unit", "group": "def", "teamId": "cle" },
+        { "id": "cle-oline-unit", "name": "Browns O-line", "kind": "unit", "group": "oline", "teamId": "cle" },
+        { "id": "cle-coach-monken", "name": "Todd Monken", "kind": "unit", "group": "coach", "teamId": "cle" }
+      ]
+    },
+    {
+      "id": "dal",
+      "abbr": "DAL",
+      "name": "Dallas Cowboys",
+      "city": "Dallas",
+      "assets": [
+        { "id": "dal-qb-dak-prescott", "name": "Dak Prescott", "kind": "player", "group": "qb", "teamId": "dal" },
+        { "id": "dal-rb-javonte-williams", "name": "Javonte Williams", "kind": "player", "group": "rb", "teamId": "dal" },
+        { "id": "dal-wr-ceedee-lamb", "name": "CeeDee Lamb", "kind": "player", "group": "wr", "teamId": "dal" },
+        { "id": "dal-wr-george-pickens", "name": "George Pickens", "kind": "player", "group": "wr", "teamId": "dal" },
+        { "id": "dal-te-jake-ferguson", "name": "Jake Ferguson", "kind": "player", "group": "te", "teamId": "dal" },
+        { "id": "dal-defplayer-quinnen-williams", "name": "Quinnen Williams", "kind": "player", "group": "defPlayer", "teamId": "dal" },
+        { "id": "dal-defplayer-daron-bland", "name": "DaRon Bland", "kind": "player", "group": "defPlayer", "teamId": "dal" },
+        { "id": "dal-def-unit", "name": "Cowboys Defense", "kind": "unit", "group": "def", "teamId": "dal" },
+        { "id": "dal-oline-unit", "name": "Cowboys O-line", "kind": "unit", "group": "oline", "teamId": "dal" },
+        { "id": "dal-coach-schottenheimer", "name": "Brian Schottenheimer", "kind": "unit", "group": "coach", "teamId": "dal" }
+      ]
+    },
+    {
+      "id": "den",
+      "abbr": "DEN",
+      "name": "Denver Broncos",
+      "city": "Denver",
+      "assets": [
+        { "id": "den-qb-bo-nix", "name": "Bo Nix", "kind": "player", "group": "qb", "teamId": "den" },
+        { "id": "den-rb-jk-dobbins", "name": "J.K. Dobbins", "kind": "player", "group": "rb", "teamId": "den" },
+        { "id": "den-wr-courtland-sutton", "name": "Courtland Sutton", "kind": "player", "group": "wr", "teamId": "den" },
+        { "id": "den-wr-jaylen-waddle", "name": "Jaylen Waddle", "kind": "player", "group": "wr", "teamId": "den" },
+        { "id": "den-te-evan-engram", "name": "Evan Engram", "kind": "player", "group": "te", "teamId": "den" },
+        { "id": "den-defplayer-patrick-surtaint-ii", "name": "Patrick Surtain II", "kind": "player", "group": "defPlayer", "teamId": "den" },
+        { "id": "den-defplayer-nik-bonitto", "name": "Nik Bonitto", "kind": "player", "group": "defPlayer", "teamId": "den" },
+        { "id": "den-def-unit", "name": "Broncos Defense", "kind": "unit", "group": "def", "teamId": "den" },
+        { "id": "den-oline-unit", "name": "Broncos O-line", "kind": "unit", "group": "oline", "teamId": "den" },
+        { "id": "den-coach-payton", "name": "Sean Payton", "kind": "unit", "group": "coach", "teamId": "den" }
+      ]
+    },
+    {
+      "id": "det",
+      "abbr": "DET",
+      "name": "Detroit Lions",
+      "city": "Detroit",
+      "assets": [
+        { "id": "det-qb-jared-goff", "name": "Jared Goff", "kind": "player", "group": "qb", "teamId": "det" },
+        { "id": "det-rb-jahmyr-gibbs", "name": "Jahmyr Gibbs", "kind": "player", "group": "rb", "teamId": "det" },
+        { "id": "det-wr-amon-ra-st-brown", "name": "Amon-Ra St. Brown", "kind": "player", "group": "wr", "teamId": "det" },
+        { "id": "det-wr-jameson-williams", "name": "Jameson Williams", "kind": "player", "group": "wr", "teamId": "det" },
+        { "id": "det-te-sam-laporta", "name": "Sam LaPorta", "kind": "player", "group": "te", "teamId": "det" },
+        { "id": "det-defplayer-aidan-hutchinson", "name": "Aidan Hutchinson", "kind": "player", "group": "defPlayer", "teamId": "det" },
+        { "id": "det-defplayer-brian-branch", "name": "Brian Branch", "kind": "player", "group": "defPlayer", "teamId": "det" },
+        { "id": "det-def-unit", "name": "Lions Defense", "kind": "unit", "group": "def", "teamId": "det" },
+        { "id": "det-oline-unit", "name": "Lions O-line", "kind": "unit", "group": "oline", "teamId": "det" },
+        { "id": "det-coach-campbell", "name": "Dan Campbell", "kind": "unit", "group": "coach", "teamId": "det" }
+      ]
+    },
+    {
+      "id": "gb",
+      "abbr": "GB",
+      "name": "Green Bay Packers",
+      "city": "Green Bay",
+      "assets": [
+        { "id": "gb-qb-jordan-love", "name": "Jordan Love", "kind": "player", "group": "qb", "teamId": "gb" },
+        { "id": "gb-rb-josh-jacobs", "name": "Josh Jacobs", "kind": "player", "group": "rb", "teamId": "gb" },
+        { "id": "gb-wr-christian-watson", "name": "Christian Watson", "kind": "player", "group": "wr", "teamId": "gb" },
+        { "id": "gb-wr-jayden-reed", "name": "Jayden Reed", "kind": "player", "group": "wr", "teamId": "gb" },
+        { "id": "gb-te-tucker-kraft", "name": "Tucker Kraft", "kind": "player", "group": "te", "teamId": "gb" },
+        { "id": "gb-defplayer-devonte-wyatt", "name": "Devonte Wyatt", "kind": "player", "group": "defPlayer", "teamId": "gb" },
+        { "id": "gb-defplayer-rashan-gary", "name": "Rashan Gary", "kind": "player", "group": "defPlayer", "teamId": "gb" },
+        { "id": "gb-def-unit", "name": "Packers Defense", "kind": "unit", "group": "def", "teamId": "gb" },
+        { "id": "gb-oline-unit", "name": "Packers O-line", "kind": "unit", "group": "oline", "teamId": "gb" },
+        { "id": "gb-coach-lafleur", "name": "Matt LaFleur", "kind": "unit", "group": "coach", "teamId": "gb" }
+      ]
+    },
+    {
+      "id": "hou",
+      "abbr": "HOU",
+      "name": "Houston Texans",
+      "city": "Houston",
+      "assets": [
+        { "id": "hou-qb-cj-stroud", "name": "C.J. Stroud", "kind": "player", "group": "qb", "teamId": "hou" },
+        { "id": "hou-rb-david-montgomery", "name": "David Montgomery", "kind": "player", "group": "rb", "teamId": "hou" },
+        { "id": "hou-wr-nico-collins", "name": "Nico Collins", "kind": "player", "group": "wr", "teamId": "hou" },
+        { "id": "hou-wr-tank-dell", "name": "Tank Dell", "kind": "player", "group": "wr", "teamId": "hou" },
+        { "id": "hou-te-dalton-schultz", "name": "Dalton Schultz", "kind": "player", "group": "te", "teamId": "hou" },
+        { "id": "hou-defplayer-will-anderson-jr", "name": "Will Anderson Jr.", "kind": "player", "group": "defPlayer", "teamId": "hou" },
+        { "id": "hou-defplayer-danielle-hunter", "name": "Danielle Hunter", "kind": "player", "group": "defPlayer", "teamId": "hou" },
+        { "id": "hou-def-unit", "name": "Texans Defense", "kind": "unit", "group": "def", "teamId": "hou" },
+        { "id": "hou-oline-unit", "name": "Texans O-line", "kind": "unit", "group": "oline", "teamId": "hou" },
+        { "id": "hou-coach-ryans", "name": "DeMeco Ryans", "kind": "unit", "group": "coach", "teamId": "hou" }
+      ]
+    },
+    {
+      "id": "ind",
+      "abbr": "IND",
+      "name": "Indianapolis Colts",
+      "city": "Indianapolis",
+      "assets": [
+        { "id": "ind-qb-daniel-jones", "name": "Daniel Jones", "kind": "player", "group": "qb", "teamId": "ind" },
+        { "id": "ind-rb-jonathan-taylor", "name": "Jonathan Taylor", "kind": "player", "group": "rb", "teamId": "ind" },
+        { "id": "ind-wr-alec-pierce", "name": "Alec Pierce", "kind": "player", "group": "wr", "teamId": "ind" },
+        { "id": "ind-wr-josh-downs", "name": "Josh Downs", "kind": "player", "group": "wr", "teamId": "ind" },
+        { "id": "ind-te-tyler-warren", "name": "Tyler Warren", "kind": "player", "group": "te", "teamId": "ind" },
+        { "id": "ind-defplayer-deforest-buckner", "name": "DeForest Buckner", "kind": "player", "group": "defPlayer", "teamId": "ind" },
+        { "id": "ind-defplayer-sauce-gardner", "name": "Sauce Gardner", "kind": "player", "group": "defPlayer", "teamId": "ind" },
+        { "id": "ind-def-unit", "name": "Colts Defense", "kind": "unit", "group": "def", "teamId": "ind" },
+        { "id": "ind-oline-unit", "name": "Colts O-line", "kind": "unit", "group": "oline", "teamId": "ind" },
+        { "id": "ind-coach-steichen", "name": "Shane Steichen", "kind": "unit", "group": "coach", "teamId": "ind" }
+      ]
+    },
+    {
+      "id": "jax",
+      "abbr": "JAX",
+      "name": "Jacksonville Jaguars",
+      "city": "Jacksonville",
+      "assets": [
+        { "id": "jax-qb-lawrence", "name": "Trevor Lawrence", "kind": "player", "group": "qb", "teamId": "jax" },
+        { "id": "jax-rb-bhayshul-tuten", "name": "Bhayshul Tuten", "kind": "player", "group": "rb", "teamId": "jax" },
+        { "id": "jax-wr-btj", "name": "Brian Thomas Jr.", "kind": "player", "group": "wr", "teamId": "jax" },
+        { "id": "jax-wr-travis-hunter", "name": "Travis Hunter", "kind": "player", "group": "wr", "teamId": "jax" },
+        { "id": "jax-te-strange", "name": "Brenton Strange", "kind": "player", "group": "te", "teamId": "jax" },
+        { "id": "jax-defplayer-hutchinson", "name": "Josh Hines-Allen", "kind": "player", "group": "defPlayer", "teamId": "jax" },
+        { "id": "jax-defplayer-travon-walker", "name": "Travon Walker", "kind": "player", "group": "defPlayer", "teamId": "jax" },
+        { "id": "jax-def-unit", "name": "Jaguars Defense", "kind": "unit", "group": "def", "teamId": "jax" },
+        { "id": "jax-oline-unit", "name": "Jaguars O-line", "kind": "unit", "group": "oline", "teamId": "jax" },
+        { "id": "jax-coach-coen", "name": "Liam Coen", "kind": "unit", "group": "coach", "teamId": "jax" }
+      ]
+    },
+    {
+      "id": "kc",
+      "abbr": "KC",
+      "name": "Kansas City Chiefs",
+      "city": "Kansas City",
+      "assets": [
+        { "id": "kc-qb-mahomes", "name": "Patrick Mahomes", "kind": "player", "group": "qb", "teamId": "kc" },
+        { "id": "kc-rb-kenneth-walker", "name": "Kenneth Walker III", "kind": "player", "group": "rb", "teamId": "kc" },
+        { "id": "kc-wr-worthy", "name": "Xavier Worthy", "kind": "player", "group": "wr", "teamId": "kc" },
+        { "id": "kc-wr-rice", "name": "Rashee Rice", "kind": "player", "group": "wr", "teamId": "kc" },
+        { "id": "kc-te-kelce", "name": "Travis Kelce", "kind": "player", "group": "te", "teamId": "kc" },
+        { "id": "kc-defplayer-chris-jones", "name": "Chris Jones", "kind": "player", "group": "defPlayer", "teamId": "kc" },
+        { "id": "kc-defplayer-george-karlaftis", "name": "George Karlaftis", "kind": "player", "group": "defPlayer", "teamId": "kc" },
+        { "id": "kc-def-unit", "name": "Chiefs Defense", "kind": "unit", "group": "def", "teamId": "kc" },
+        { "id": "kc-oline-unit", "name": "Chiefs O-line", "kind": "unit", "group": "oline", "teamId": "kc" },
+        { "id": "kc-coach-reid", "name": "Andy Reid", "kind": "unit", "group": "coach", "teamId": "kc" }
+      ]
+    },
+    {
+      "id": "lv",
+      "abbr": "LV",
+      "name": "Las Vegas Raiders",
+      "city": "Las Vegas",
+      "assets": [
+        { "id": "lv-qb-kirk-cousins", "name": "Kirk Cousins", "kind": "player", "group": "qb", "teamId": "lv" },
+        { "id": "lv-rb-ashton-jeanty", "name": "Ashton Jeanty", "kind": "player", "group": "rb", "teamId": "lv" },
+        { "id": "lv-wr-jalen-nailor", "name": "Jalen Nailor", "kind": "player", "group": "wr", "teamId": "lv" },
+        { "id": "lv-wr-tre-tucker", "name": "Tre Tucker", "kind": "player", "group": "wr", "teamId": "lv" },
+        { "id": "lv-te-brock-bowers", "name": "Brock Bowers", "kind": "player", "group": "te", "teamId": "lv" },
+        { "id": "lv-defplayer-maxx-crosby", "name": "Maxx Crosby", "kind": "player", "group": "defPlayer", "teamId": "lv" },
+        { "id": "lv-defplayer-malcolm-koonce", "name": "Malcolm Koonce", "kind": "player", "group": "defPlayer", "teamId": "lv" },
+        { "id": "lv-def-unit", "name": "Raiders Defense", "kind": "unit", "group": "def", "teamId": "lv" },
+        { "id": "lv-oline-unit", "name": "Raiders O-line", "kind": "unit", "group": "oline", "teamId": "lv" },
+        { "id": "lv-coach-kubiak", "name": "Klint Kubiak", "kind": "unit", "group": "coach", "teamId": "lv" }
+      ]
+    },
+    {
+      "id": "lac",
+      "abbr": "LAC",
+      "name": "Los Angeles Chargers",
+      "city": "Los Angeles",
+      "assets": [
+        { "id": "lac-qb-justin-herbert", "name": "Justin Herbert", "kind": "player", "group": "qb", "teamId": "lac" },
+        { "id": "lac-rb-omarion-hampton", "name": "Omarion Hampton", "kind": "player", "group": "rb", "teamId": "lac" },
+        { "id": "lac-wr-ladd-mcconkey", "name": "Ladd McConkey", "kind": "player", "group": "wr", "teamId": "lac" },
+        { "id": "lac-wr-quentin-johnston", "name": "Quentin Johnston", "kind": "player", "group": "wr", "teamId": "lac" },
+        { "id": "lac-te-will-dissly", "name": "Will Dissly", "kind": "player", "group": "te", "teamId": "lac" },
+        { "id": "lac-defplayer-khalil-mack", "name": "Khalil Mack", "kind": "player", "group": "defPlayer", "teamId": "lac" },
+        { "id": "lac-defplayer-derwin-james", "name": "Derwin James", "kind": "player", "group": "defPlayer", "teamId": "lac" },
+        { "id": "lac-def-unit", "name": "Chargers Defense", "kind": "unit", "group": "def", "teamId": "lac" },
+        { "id": "lac-oline-unit", "name": "Chargers O-line", "kind": "unit", "group": "oline", "teamId": "lac" },
+        { "id": "lac-coach-harbaugh-jim", "name": "Jim Harbaugh", "kind": "unit", "group": "coach", "teamId": "lac" }
+      ]
+    },
+    {
+      "id": "lar",
+      "abbr": "LAR",
+      "name": "Los Angeles Rams",
+      "city": "Los Angeles",
+      "assets": [
+        { "id": "lar-qb-stafford", "name": "Matthew Stafford", "kind": "player", "group": "qb", "teamId": "lar" },
+        { "id": "lar-rb-kyren", "name": "Kyren Williams", "kind": "player", "group": "rb", "teamId": "lar" },
+        { "id": "lar-wr-puka", "name": "Puka Nacua", "kind": "player", "group": "wr", "teamId": "lar" },
+        { "id": "lar-wr-adams", "name": "Davante Adams", "kind": "player", "group": "wr", "teamId": "lar" },
+        { "id": "lar-te-higbee", "name": "Tyler Higbee", "kind": "player", "group": "te", "teamId": "lar" },
+        { "id": "lar-defplayer-aaron-donald", "name": "Aaron Donald", "kind": "player", "group": "defPlayer", "teamId": "lar" },
+        { "id": "lar-defplayer-myles-garrett", "name": "Myles Garrett", "kind": "player", "group": "defPlayer", "teamId": "lar" },
+        { "id": "lar-defplayer-trent-mcduffie", "name": "Trent McDuffie", "kind": "player", "group": "defPlayer", "teamId": "lar" },
+        { "id": "lar-def-unit", "name": "Rams Defense", "kind": "unit", "group": "def", "teamId": "lar" },
+        { "id": "lar-oline-unit", "name": "Rams O-line", "kind": "unit", "group": "oline", "teamId": "lar" },
+        { "id": "lar-coach-mcvay", "name": "Sean McVay", "kind": "unit", "group": "coach", "teamId": "lar" }
+      ]
+    },
+    {
+      "id": "mia",
+      "abbr": "MIA",
+      "name": "Miami Dolphins",
+      "city": "Miami",
+      "assets": [
+        { "id": "mia-qb-malik-willis", "name": "Malik Willis", "kind": "player", "group": "qb", "teamId": "mia" },
+        { "id": "mia-rb-devon-achane", "name": "De'Von Achane", "kind": "player", "group": "rb", "teamId": "mia" },
+        { "id": "mia-wr-tyreek-hill", "name": "Tyreek Hill", "kind": "player", "group": "wr", "teamId": "mia" },
+        { "id": "mia-wr-malik-washington", "name": "Malik Washington", "kind": "player", "group": "wr", "teamId": "mia" },
+        { "id": "mia-te-greg-dulcich", "name": "Greg Dulcich", "kind": "player", "group": "te", "teamId": "mia" },
+        { "id": "mia-defplayer-chop-robinson", "name": "Chop Robinson", "kind": "player", "group": "defPlayer", "teamId": "mia" },
+        { "id": "mia-defplayer-jevon-holland", "name": "Jevon Holland", "kind": "player", "group": "defPlayer", "teamId": "mia" },
+        { "id": "mia-def-unit", "name": "Dolphins Defense", "kind": "unit", "group": "def", "teamId": "mia" },
+        { "id": "mia-oline-unit", "name": "Dolphins O-line", "kind": "unit", "group": "oline", "teamId": "mia" },
+        { "id": "mia-coach-hafley", "name": "Jeff Hafley", "kind": "unit", "group": "coach", "teamId": "mia" }
+      ]
+    },
+    {
+      "id": "min",
+      "abbr": "MIN",
+      "name": "Minnesota Vikings",
+      "city": "Minnesota",
+      "assets": [
+        { "id": "min-qb-kyler-murray", "name": "Kyler Murray", "kind": "player", "group": "qb", "teamId": "min" },
+        { "id": "min-rb-aaron-jones", "name": "Aaron Jones", "kind": "player", "group": "rb", "teamId": "min" },
+        { "id": "min-wr-justin-jefferson", "name": "Justin Jefferson", "kind": "player", "group": "wr", "teamId": "min" },
+        { "id": "min-wr-jordan-addison", "name": "Jordan Addison", "kind": "player", "group": "wr", "teamId": "min" },
+        { "id": "min-te-tj-hockenson", "name": "T.J. Hockenson", "kind": "player", "group": "te", "teamId": "min" },
+        { "id": "min-defplayer-harrison-smith", "name": "Harrison Smith", "kind": "player", "group": "defPlayer", "teamId": "min" },
+        { "id": "min-defplayer-andrew-van-ginkel", "name": "Andrew Van Ginkel", "kind": "player", "group": "defPlayer", "teamId": "min" },
+        { "id": "min-def-unit", "name": "Vikings Defense", "kind": "unit", "group": "def", "teamId": "min" },
+        { "id": "min-oline-unit", "name": "Vikings O-line", "kind": "unit", "group": "oline", "teamId": "min" },
+        { "id": "min-coach-oconnell", "name": "Kevin O'Connell", "kind": "unit", "group": "coach", "teamId": "min" }
+      ]
+    },
+    {
+      "id": "ne",
+      "abbr": "NE",
+      "name": "New England Patriots",
+      "city": "New England",
+      "assets": [
+        { "id": "ne-qb-drake-maye", "name": "Drake Maye", "kind": "player", "group": "qb", "teamId": "ne" },
+        { "id": "ne-rb-rhamondre-stevenson", "name": "Rhamondre Stevenson", "kind": "player", "group": "rb", "teamId": "ne" },
+        { "id": "ne-wr-aj-brown", "name": "A.J. Brown", "kind": "player", "group": "wr", "teamId": "ne" },
+        { "id": "ne-wr-romeo-doubs", "name": "Romeo Doubs", "kind": "player", "group": "wr", "teamId": "ne" },
+        { "id": "ne-te-hunter-henry", "name": "Hunter Henry", "kind": "player", "group": "te", "teamId": "ne" },
+        { "id": "ne-defplayer-harold-landry", "name": "Harold Landry III", "kind": "player", "group": "defPlayer", "teamId": "ne" },
+        { "id": "ne-defplayer-christian-gonzalez", "name": "Christian Gonzalez", "kind": "player", "group": "defPlayer", "teamId": "ne" },
+        { "id": "ne-def-unit", "name": "Patriots Defense", "kind": "unit", "group": "def", "teamId": "ne" },
+        { "id": "ne-oline-unit", "name": "Patriots O-line", "kind": "unit", "group": "oline", "teamId": "ne" },
+        { "id": "ne-coach-vrabel", "name": "Mike Vrabel", "kind": "unit", "group": "coach", "teamId": "ne" }
+      ]
+    },
+    {
+      "id": "no",
+      "abbr": "NO",
+      "name": "New Orleans Saints",
+      "city": "New Orleans",
+      "assets": [
+        { "id": "no-qb-tyler-shough", "name": "Tyler Shough", "kind": "player", "group": "qb", "teamId": "no" },
+        { "id": "no-rb-alvin-kamara", "name": "Alvin Kamara", "kind": "player", "group": "rb", "teamId": "no" },
+        { "id": "no-wr-chris-olave", "name": "Chris Olave", "kind": "player", "group": "wr", "teamId": "no" },
+        { "id": "no-wr-brandin-cooks", "name": "Brandin Cooks", "kind": "player", "group": "wr", "teamId": "no" },
+        { "id": "no-te-juwan-johnson", "name": "Juwan Johnson", "kind": "player", "group": "te", "teamId": "no" },
+        { "id": "no-defplayer-kool-aid-mckinstry", "name": "Kool-Aid McKinstry", "kind": "player", "group": "defPlayer", "teamId": "no" },
+        { "id": "no-defplayer-kaden-elliss", "name": "Kaden Elliss", "kind": "player", "group": "defPlayer", "teamId": "no" },
+        { "id": "no-def-unit", "name": "Saints Defense", "kind": "unit", "group": "def", "teamId": "no" },
+        { "id": "no-oline-unit", "name": "Saints O-line", "kind": "unit", "group": "oline", "teamId": "no" },
+        { "id": "no-coach-moore", "name": "Kellen Moore", "kind": "unit", "group": "coach", "teamId": "no" }
+      ]
+    },
+    {
+      "id": "nyg",
+      "abbr": "NYG",
+      "name": "New York Giants",
+      "city": "New York",
+      "assets": [
+        { "id": "nyg-qb-jaxson-dart", "name": "Jaxson Dart", "kind": "player", "group": "qb", "teamId": "nyg" },
+        { "id": "nyg-rb-cam-skattebo", "name": "Cam Skattebo", "kind": "player", "group": "rb", "teamId": "nyg" },
+        { "id": "nyg-wr-malik-nabers", "name": "Malik Nabers", "kind": "player", "group": "wr", "teamId": "nyg" },
+        { "id": "nyg-wr-darius-slayton", "name": "Darius Slayton", "kind": "player", "group": "wr", "teamId": "nyg" },
+        { "id": "nyg-te-theo-johnson", "name": "Theo Johnson", "kind": "player", "group": "te", "teamId": "nyg" },
+        { "id": "nyg-defplayer-abdul-carter", "name": "Abdul Carter", "kind": "player", "group": "defPlayer", "teamId": "nyg" },
+        { "id": "nyg-defplayer-brian-burns", "name": "Brian Burns", "kind": "player", "group": "defPlayer", "teamId": "nyg" },
+        { "id": "nyg-def-unit", "name": "Giants Defense", "kind": "unit", "group": "def", "teamId": "nyg" },
+        { "id": "nyg-oline-unit", "name": "Giants O-line", "kind": "unit", "group": "oline", "teamId": "nyg" },
+        { "id": "nyg-coach-harbaugh", "name": "John Harbaugh", "kind": "unit", "group": "coach", "teamId": "nyg" }
+      ]
+    },
+    {
+      "id": "nyj",
+      "abbr": "NYJ",
+      "name": "New York Jets",
+      "city": "New York",
+      "assets": [
+        { "id": "nyj-qb-geno-smith", "name": "Geno Smith", "kind": "player", "group": "qb", "teamId": "nyj" },
+        { "id": "nyj-rb-breece-hall", "name": "Breece Hall", "kind": "player", "group": "rb", "teamId": "nyj" },
+        { "id": "nyj-wr-garrett-wilson", "name": "Garrett Wilson", "kind": "player", "group": "wr", "teamId": "nyj" },
+        { "id": "nyj-wr-adonai-mitchell", "name": "Adonai Mitchell", "kind": "player", "group": "wr", "teamId": "nyj" },
+        { "id": "nyj-te-mason-taylor", "name": "Mason Taylor", "kind": "player", "group": "te", "teamId": "nyj" },
+        { "id": "nyj-defplayer-will-mcdonald", "name": "Will McDonald IV", "kind": "player", "group": "defPlayer", "teamId": "nyj" },
+        { "id": "nyj-defplayer-minkah-fitzpatrick", "name": "Minkah Fitzpatrick", "kind": "player", "group": "defPlayer", "teamId": "nyj" },
+        { "id": "nyj-def-unit", "name": "Jets Defense", "kind": "unit", "group": "def", "teamId": "nyj" },
+        { "id": "nyj-oline-unit", "name": "Jets O-line", "kind": "unit", "group": "oline", "teamId": "nyj" },
+        { "id": "nyj-coach-glenn", "name": "Aaron Glenn", "kind": "unit", "group": "coach", "teamId": "nyj" }
+      ]
+    },
+    {
+      "id": "phi",
+      "abbr": "PHI",
+      "name": "Philadelphia Eagles",
+      "city": "Philadelphia",
+      "assets": [
+        { "id": "phi-qb-jalen-hurts", "name": "Jalen Hurts", "kind": "player", "group": "qb", "teamId": "phi" },
+        { "id": "phi-rb-saquon-barkley", "name": "Saquon Barkley", "kind": "player", "group": "rb", "teamId": "phi" },
+        { "id": "phi-wr-devonta-smith", "name": "DeVonta Smith", "kind": "player", "group": "wr", "teamId": "phi" },
+        { "id": "phi-wr-dontayvion-wicks", "name": "Dontayvion Wicks", "kind": "player", "group": "wr", "teamId": "phi" },
+        { "id": "phi-te-dallas-goedert", "name": "Dallas Goedert", "kind": "player", "group": "te", "teamId": "phi" },
+        { "id": "phi-defplayer-jonathan-greenard", "name": "Jonathan Greenard", "kind": "player", "group": "defPlayer", "teamId": "phi" },
+        { "id": "phi-defplayer-jalen-carter", "name": "Jalen Carter", "kind": "player", "group": "defPlayer", "teamId": "phi" },
+        { "id": "phi-def-unit", "name": "Eagles Defense", "kind": "unit", "group": "def", "teamId": "phi" },
+        { "id": "phi-oline-unit", "name": "Eagles O-line", "kind": "unit", "group": "oline", "teamId": "phi" },
+        { "id": "phi-coach-sirianni", "name": "Nick Sirianni", "kind": "unit", "group": "coach", "teamId": "phi" }
+      ]
+    },
+    {
+      "id": "pit",
+      "abbr": "PIT",
+      "name": "Pittsburgh Steelers",
+      "city": "Pittsburgh",
+      "assets": [
+        { "id": "pit-qb-aaron-rodgers", "name": "Aaron Rodgers", "kind": "player", "group": "qb", "teamId": "pit" },
+        { "id": "pit-rb-jaylen-warren", "name": "Jaylen Warren", "kind": "player", "group": "rb", "teamId": "pit" },
+        { "id": "pit-wr-dk-metcalf", "name": "DK Metcalf", "kind": "player", "group": "wr", "teamId": "pit" },
+        { "id": "pit-wr-michael-pittman", "name": "Michael Pittman Jr.", "kind": "player", "group": "wr", "teamId": "pit" },
+        { "id": "pit-te-pat-freiermuth", "name": "Pat Freiermuth", "kind": "player", "group": "te", "teamId": "pit" },
+        { "id": "pit-defplayer-tj-watt", "name": "T.J. Watt", "kind": "player", "group": "defPlayer", "teamId": "pit" },
+        { "id": "pit-defplayer-joey-porter-jr", "name": "Joey Porter Jr.", "kind": "player", "group": "defPlayer", "teamId": "pit" },
+        { "id": "pit-def-unit", "name": "Steelers Defense", "kind": "unit", "group": "def", "teamId": "pit" },
+        { "id": "pit-oline-unit", "name": "Steelers O-line", "kind": "unit", "group": "oline", "teamId": "pit" },
+        { "id": "pit-coach-mccarthy", "name": "Mike McCarthy", "kind": "unit", "group": "coach", "teamId": "pit" }
+      ]
+    },
+    {
+      "id": "sea",
+      "abbr": "SEA",
+      "name": "Seattle Seahawks",
+      "city": "Seattle",
+      "assets": [
+        { "id": "sea-qb-sam-darnold", "name": "Sam Darnold", "kind": "player", "group": "qb", "teamId": "sea" },
+        { "id": "sea-rb-jadarian-price", "name": "Jadarian Price", "kind": "player", "group": "rb", "teamId": "sea" },
+        { "id": "sea-wr-jaxon-smith-njigba", "name": "Jaxon Smith-Njigba", "kind": "player", "group": "wr", "teamId": "sea" },
+        { "id": "sea-wr-rashid-shaheed", "name": "Rashid Shaheed", "kind": "player", "group": "wr", "teamId": "sea" },
+        { "id": "sea-te-aj-barner", "name": "AJ Barner", "kind": "player", "group": "te", "teamId": "sea" },
+        { "id": "sea-defplayer-leonard-williams", "name": "Leonard Williams", "kind": "player", "group": "defPlayer", "teamId": "sea" },
+        { "id": "sea-defplayer-byron-murphy-ii", "name": "Byron Murphy II", "kind": "player", "group": "defPlayer", "teamId": "sea" },
+        { "id": "sea-def-unit", "name": "Seahawks Defense", "kind": "unit", "group": "def", "teamId": "sea" },
+        { "id": "sea-oline-unit", "name": "Seahawks O-line", "kind": "unit", "group": "oline", "teamId": "sea" },
+        { "id": "sea-coach-macdonald", "name": "Mike Macdonald", "kind": "unit", "group": "coach", "teamId": "sea" }
+      ]
+    },
+    {
+      "id": "sf",
+      "abbr": "SF",
+      "name": "San Francisco 49ers",
+      "city": "San Francisco",
+      "assets": [
+        { "id": "sf-qb-brock-purdy", "name": "Brock Purdy", "kind": "player", "group": "qb", "teamId": "sf" },
+        { "id": "sf-rb-christian-mccaffrey", "name": "Christian McCaffrey", "kind": "player", "group": "rb", "teamId": "sf" },
+        { "id": "sf-wr-mike-evans", "name": "Mike Evans", "kind": "player", "group": "wr", "teamId": "sf" },
+        { "id": "sf-wr-deebo-samuel", "name": "Deebo Samuel", "kind": "player", "group": "wr", "teamId": "sf" },
+        { "id": "sf-te-george-kittle", "name": "George Kittle", "kind": "player", "group": "te", "teamId": "sf" },
+        { "id": "sf-defplayer-nick-bosa", "name": "Nick Bosa", "kind": "player", "group": "defPlayer", "teamId": "sf" },
+        { "id": "sf-defplayer-fred-warner", "name": "Fred Warner", "kind": "player", "group": "defPlayer", "teamId": "sf" },
+        { "id": "sf-def-unit", "name": "49ers Defense", "kind": "unit", "group": "def", "teamId": "sf" },
+        { "id": "sf-oline-unit", "name": "49ers O-line", "kind": "unit", "group": "oline", "teamId": "sf" },
+        { "id": "sf-coach-shanahan", "name": "Kyle Shanahan", "kind": "unit", "group": "coach", "teamId": "sf" }
+      ]
+    },
+    {
+      "id": "tb",
+      "abbr": "TB",
+      "name": "Tampa Bay Buccaneers",
+      "city": "Tampa Bay",
+      "assets": [
+        { "id": "tb-qb-baker-mayfield", "name": "Baker Mayfield", "kind": "player", "group": "qb", "teamId": "tb" },
+        { "id": "tb-rb-bucky-irving", "name": "Bucky Irving", "kind": "player", "group": "rb", "teamId": "tb" },
+        { "id": "tb-wr-emeka-egbuka", "name": "Emeka Egbuka", "kind": "player", "group": "wr", "teamId": "tb" },
+        { "id": "tb-wr-chris-godwin", "name": "Chris Godwin", "kind": "player", "group": "wr", "teamId": "tb" },
+        { "id": "tb-te-cade-otton", "name": "Cade Otton", "kind": "player", "group": "te", "teamId": "tb" },
+        { "id": "tb-defplayer-vita-vea", "name": "Vita Vea", "kind": "player", "group": "defPlayer", "teamId": "tb" },
+        { "id": "tb-defplayer-lavonte-david", "name": "Lavonte David", "kind": "player", "group": "defPlayer", "teamId": "tb" },
+        { "id": "tb-def-unit", "name": "Buccaneers Defense", "kind": "unit", "group": "def", "teamId": "tb" },
+        { "id": "tb-oline-unit", "name": "Buccaneers O-line", "kind": "unit", "group": "oline", "teamId": "tb" },
+        { "id": "tb-coach-bowles", "name": "Todd Bowles", "kind": "unit", "group": "coach", "teamId": "tb" }
+      ]
+    },
+    {
+      "id": "ten",
+      "abbr": "TEN",
+      "name": "Tennessee Titans",
+      "city": "Tennessee",
+      "assets": [
+        { "id": "ten-qb-cam-ward", "name": "Cam Ward", "kind": "player", "group": "qb", "teamId": "ten" },
+        { "id": "ten-rb-tony-pollard", "name": "Tony Pollard", "kind": "player", "group": "rb", "teamId": "ten" },
+        { "id": "ten-wr-calvin-ridley", "name": "Calvin Ridley", "kind": "player", "group": "wr", "teamId": "ten" },
+        { "id": "ten-wr-wandale-robinson", "name": "Wan'Dale Robinson", "kind": "player", "group": "wr", "teamId": "ten" },
+        { "id": "ten-te-chigoziem-okonkwo", "name": "Chigoziem Okonkwo", "kind": "player", "group": "te", "teamId": "ten" },
+        { "id": "ten-defplayer-jeffery-simmons", "name": "Jeffery Simmons", "kind": "player", "group": "defPlayer", "teamId": "ten" },
+        { "id": "ten-defplayer-alontae-taylor", "name": "Alontae Taylor", "kind": "player", "group": "defPlayer", "teamId": "ten" },
+        { "id": "ten-def-unit", "name": "Titans Defense", "kind": "unit", "group": "def", "teamId": "ten" },
+        { "id": "ten-oline-unit", "name": "Titans O-line", "kind": "unit", "group": "oline", "teamId": "ten" },
+        { "id": "ten-coach-saleh", "name": "Robert Saleh", "kind": "unit", "group": "coach", "teamId": "ten" }
+      ]
+    },
+    {
+      "id": "was",
+      "abbr": "WAS",
+      "name": "Washington Commanders",
+      "city": "Washington",
+      "assets": [
+        { "id": "was-qb-jayden-daniels", "name": "Jayden Daniels", "kind": "player", "group": "qb", "teamId": "was" },
+        { "id": "was-rb-jacory-croskey-merritt", "name": "Jacory Croskey-Merritt", "kind": "player", "group": "rb", "teamId": "was" },
+        { "id": "was-wr-terry-mclaurin", "name": "Terry McLaurin", "kind": "player", "group": "wr", "teamId": "was" },
+        { "id": "was-wr-stefon-diggs", "name": "Stefon Diggs", "kind": "player", "group": "wr", "teamId": "was" },
+        { "id": "was-te-zach-ertz", "name": "Zach Ertz", "kind": "player", "group": "te", "teamId": "was" },
+        { "id": "was-defplayer-odafe-oweh", "name": "Odafe Oweh", "kind": "player", "group": "defPlayer", "teamId": "was" },
+        { "id": "was-defplayer-jonathan-allen", "name": "Jonathan Allen", "kind": "player", "group": "defPlayer", "teamId": "was" },
+        { "id": "was-def-unit", "name": "Commanders Defense", "kind": "unit", "group": "def", "teamId": "was" },
+        { "id": "was-oline-unit", "name": "Commanders O-line", "kind": "unit", "group": "oline", "teamId": "was" },
+        { "id": "was-coach-quinn", "name": "Dan Quinn", "kind": "unit", "group": "coach", "teamId": "was" }
+      ]
+    }
+  ]
+}
