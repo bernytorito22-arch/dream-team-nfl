@@ -40,6 +40,19 @@ describe("handleReveal", () => {
     expect(json.verdict.championPlayerId).toBe("p1");
   });
 
+  it("returns ok verdict from OpenAI-style choices", async () => {
+    const env = {
+      AI: { run: async () => ({ choices: [{ message: { content: modelJson } }] }) },
+    };
+    const res = await handleReveal(
+      new Request("https://x/api/reveal", { method: "POST", body: JSON.stringify(body) }),
+      env,
+    );
+    const json = await res.json();
+    expect(json.ok).toBe(true);
+    expect(json.verdict.championPlayerId).toBe("p1");
+  });
+
   it("returns SCORE_ERROR on garbage model output", async () => {
     const env = { AI: { run: async () => ({ response: "not json" }) } };
     const res = await handleReveal(

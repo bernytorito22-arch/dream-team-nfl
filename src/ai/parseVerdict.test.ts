@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseVerdict } from "./parseVerdict";
+import { extractJson, extractModelText, parseVerdict } from "./parseVerdict";
 
 const players = ["p0", "p1"];
 
@@ -40,5 +40,22 @@ describe("parseVerdict", () => {
       records: [{ ...good.records[0], wins: 18 }, good.records[1]],
     }, players)).toThrow();
     expect(() => parseVerdict({ ...good, championPlayerId: "p9" }, players)).toThrow();
+  });
+});
+
+describe("extractJson", () => {
+  it("parses JSON wrapped in markdown fences", () => {
+    const wrapped = "```json\n" + JSON.stringify(good) + "\n```";
+    expect(extractJson(wrapped)).toEqual(good);
+  });
+});
+
+describe("extractModelText", () => {
+  it("reads OpenAI-style choices when response is missing", () => {
+    expect(
+      extractModelText({
+        choices: [{ message: { content: JSON.stringify(good) } }],
+      }),
+    ).toBe(JSON.stringify(good));
   });
 });

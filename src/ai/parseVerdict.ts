@@ -4,6 +4,32 @@ function isRecord(v: unknown): v is Record<string, unknown> {
   return typeof v === "object" && v !== null;
 }
 
+export function extractModelText(result: unknown): string {
+  if (!isRecord(result)) return "";
+  if (typeof result.response === "string" && result.response.trim()) {
+    return result.response;
+  }
+  const choices = result.choices;
+  if (!Array.isArray(choices) || !isRecord(choices[0])) return "";
+  const message = choices[0].message;
+  if (!isRecord(message)) return "";
+  if (typeof message.content === "string" && message.content.trim()) {
+    return message.content;
+  }
+  if (typeof message.reasoning_content === "string") {
+    return message.reasoning_content;
+  }
+  return "";
+}
+
+export function extractJson(text: string): unknown {
+  const stripped = text.replace(/```(?:json)?/gi, "").trim();
+  const start = stripped.indexOf("{");
+  const end = stripped.lastIndexOf("}");
+  if (start < 0 || end < 0) throw new Error(`no json in: ${text.slice(0, 200)}`);
+  return JSON.parse(stripped.slice(start, end + 1));
+}
+
 export function parseVerdict(raw: unknown, playerIds: string[]): Verdict {
   if (!isRecord(raw) || !Array.isArray(raw.records)) throw new Error("invalid verdict");
   if (raw.records.length !== playerIds.length) throw new Error("record count");

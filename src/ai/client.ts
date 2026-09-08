@@ -33,7 +33,7 @@ export async function fetchReveal(
   dreamTeams: DreamTeam[],
   league: League,
   customAssets: LeagueAsset[] = [],
-  signal: AbortSignal = AbortSignal.timeout(20_000),
+  signal: AbortSignal = AbortSignal.timeout(45_000),
 ): Promise<RevealResult> {
   try {
     const res = await fetch("/api/reveal", {

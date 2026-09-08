@@ -1,6 +1,8 @@
-import { parseVerdict } from "../src/ai/parseVerdict";
+import { extractJson, extractModelText, parseVerdict } from "../src/ai/parseVerdict";
 import type { Verdict } from "../src/ai/schema";
 import { revealPrompt } from "./prompt";
+
+export const REVEAL_MODEL = "@cf/meta/llama-3.1-8b-instruct-fast";
 
 export type RevealDreamTeam = {
   playerId: string;
@@ -14,22 +16,11 @@ export type RevealEnv = {
       model: string,
       input: {
         messages: { role: string; content: string }[];
-        reasoning_effort?: "low" | "medium" | "high";
         max_tokens?: number;
       },
-    ) => Promise<{
-      response?: string;
-      choices?: { message?: { content?: string } }[];
-    }>;
+    ) => Promise<unknown>;
   };
 };
-
-function extractJson(text: string): unknown {
-  const start = text.indexOf("{");
-  const end = text.lastIndexOf("}");
-  if (start < 0 || end < 0) throw new Error(`no json in: ${text.slice(0, 200)}`);
-  return JSON.parse(text.slice(start, end + 1));
-}
 
 export async function runReveal(
   env: RevealEnv,
@@ -37,15 +28,15 @@ export async function runReveal(
 ): Promise<{ ok: true; verdict: Verdict } | { ok: false }> {
   try {
     const playerIds = dreamTeams.map((d) => d.playerId);
-    const result = await env.AI.run("@cf/zai-org/glm-4.7-flash", {
+    const result = await env.AI.run(REVEAL_MODEL, {
       messages: [{ role: "user", content: revealPrompt(dreamTeams) }],
-      reasoning_effort: "low",
-      max_tokens: 8192,
+      max_tokens: 1024,
     });
-    const raw = String(result.response ?? result.choices?.[0]?.message?.content ?? "");
+    const raw = extractModelText(result);
     const verdict = parseVerdict(extractJson(raw), playerIds);
     return { ok: true, verdict };
-  } catch {
+  } catch (err) {
+    console.error("runReveal failed", err);
     return { ok: false };
   }
 }
