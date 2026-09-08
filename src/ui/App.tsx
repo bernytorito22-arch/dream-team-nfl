@@ -16,6 +16,7 @@ import { findAsset } from "../league/names";
 import type { League, MenuGroup, SlotId, TurnMode } from "../league/types";
 import { normalizeRoomCode } from "../room/codes";
 import { ROOM_ERRORS } from "../room/protocol";
+import { isFatalRoomError, ROOM_CLOSE_NOT_FOUND, shouldRetryReconnect } from "../room/reconnectPolicy";
 import { clearSeat, loadSeat, saveSeat } from "../room/seat";
 import { LobbyScreen } from "./LobbyScreen";
 import { PickScreen } from "./PickScreen";
@@ -57,6 +58,9 @@ export function App() {
   const [reconnecting, setReconnecting] = useState(false);
   const roomSocket = useRef<RoomSocket | null>(null);
   const leaveIntentional = useRef(false);
+  const roomErrorRef = useRef<string | null>(null);
+  const connGen = useRef(0);
+  const reconnectTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [localWheelSpinning, setLocalWheelSpinning] = useState(false);
 
   useEffect(() => {
@@ -70,6 +74,7 @@ export function App() {
 
     const seat = loadSeat();
     if (seat && !loaded.ok) {
+      setAppMode("room");
       connectToRoom(seat.roomCode, { token: seat.seatToken });
     }
   }, []);
@@ -81,6 +86,7 @@ export function App() {
   useEffect(() => {
     return () => {
       if (spinTimer.current) clearTimeout(spinTimer.current);
+      if (reconnectTimer.current) clearTimeout(reconnectTimer.current);
       roomSocket.current?.close();
     };
   }, []);
@@ -105,16 +111,43 @@ export function App() {
     roomSocket.current = null;
   }
 
-  function handleRoomSnapshot(snap: RoomSnapshot) {
-    setRoomSnap(snap);
+  function setRoomErrorState(error: string | null) {
+    roomErrorRef.current = error;
+    setRoomError(error);
+  }
+
+  function setRoomPath(code: string | null) {
+    const path = code ? `/r/${code}` : "/";
+    if (window.location.pathname !== path) {
+      window.history.replaceState(null, "", path);
+    }
+  }
+
+  function abandonRoom(error: string | null) {
+    if (reconnectTimer.current) {
+      clearTimeout(reconnectTimer.current);
+      reconnectTimer.current = null;
+    }
+    leaveIntentional.current = true;
+    connGen.current += 1;
+    clearSeat();
+    closeRoomSocket();
+    setRoomSnap(null);
+    setAppMode("setup");
     setReconnecting(false);
+    setRoomErrorState(error);
+    setRoomPath(null);
+  }
+
+  function handleRoomSnapshot(snap: RoomSnapshot) {
     if (snap.session.destroyed) {
-      setRoomError(ROOM_ERRORS.hostLeft);
-      closeRoomSocket();
-      setAppMode("setup");
-      setRoomSnap(null);
+      abandonRoom(ROOM_ERRORS.hostLeft);
       return;
     }
+    setRoomSnap(snap);
+    setReconnecting(false);
+    setRoomErrorState(null);
+    setRoomPath(snap.session.code);
     saveSeat({
       roomCode: snap.session.code,
       playerId: snap.you.playerId,
@@ -123,7 +156,6 @@ export function App() {
     setViewingId((current) => current ?? snap.you.playerId);
     if (snap.session.phase === "play" && snap.session.game) {
       setAppMode("room");
-      setRoomError(null);
     } else if (snap.session.phase === "lobby") {
       setAppMode("room");
     }
@@ -138,25 +170,41 @@ export function App() {
     code: string,
     opts?: { token?: string; guestName?: string },
   ) {
+    connGen.current += 1;
+    const gen = connGen.current;
+    if (reconnectTimer.current) {
+      clearTimeout(reconnectTimer.current);
+      reconnectTimer.current = null;
+    }
     closeRoomSocket();
     leaveIntentional.current = false;
-    setReconnecting(true);
-    setRoomError(null);
+    setRoomErrorState(null);
     const socket = openRoomSocket(
       code,
       {
         onSnapshot: handleRoomSnapshot,
         onError: (err) => {
-          setRoomError(err);
+          if (gen !== connGen.current) return;
           if (err === SCORE_ERROR) setScoreError(SCORE_ERROR);
-          if (err === ROOM_ERRORS.hostLeft) {
-            setAppMode("setup");
-            setRoomSnap(null);
-            closeRoomSocket();
+          if (isFatalRoomError(err)) {
+            abandonRoom(err);
+            return;
           }
+          setRoomErrorState(err);
         },
-        onClose: () => {
-          if (leaveIntentional.current) {
+        onClose: (closeCode) => {
+          if (gen !== connGen.current) return;
+          if (closeCode === ROOM_CLOSE_NOT_FOUND) {
+            abandonRoom(ROOM_ERRORS.notFound);
+            return;
+          }
+          if (
+            !shouldRetryReconnect({
+              leaveIntentional: leaveIntentional.current,
+              lastError: roomErrorRef.current,
+              closeCode,
+            })
+          ) {
             leaveIntentional.current = false;
             setReconnecting(false);
             return;
@@ -164,10 +212,12 @@ export function App() {
           const seat = loadSeat();
           if (seat && seat.roomCode === code.toUpperCase()) {
             setReconnecting(true);
-            window.setTimeout(
-              () => connectToRoom(seat.roomCode, { token: seat.seatToken }),
-              1500,
-            );
+            reconnectTimer.current = window.setTimeout(() => {
+              if (gen !== connGen.current) return;
+              connectToRoom(seat.roomCode, { token: seat.seatToken });
+            }, 1500);
+          } else {
+            setReconnecting(false);
           }
         },
       },
@@ -190,18 +240,14 @@ export function App() {
 
   function goHomeRoom() {
     stopSpinTimer();
-    leaveIntentional.current = true;
     roomSocket.current?.send({ type: "leave" });
-    closeRoomSocket();
-    setRoomSnap(null);
-    setAppMode("setup");
     setScoring(false);
     setScoreError(null);
     setShowWhy(false);
     setShowTiebreak(false);
     setViewingId(null);
     setLocalWheelSpinning(false);
-    setReconnecting(false);
+    abandonRoom(null);
   }
 
   function resetDraftLocal() {
@@ -225,19 +271,21 @@ export function App() {
         playerId: created.playerId,
         seatToken: created.seatToken,
       });
+      setRoomPath(created.code);
       connectToRoom(created.code, { token: created.seatToken });
       setAppMode("room");
     } catch {
-      setRoomError("Could not create room");
+      setRoomErrorState("Could not create room");
     }
   }
 
   function handleJoinRoom(code: string, name: string) {
     const normalized = normalizeRoomCode(code);
     if (normalized.length !== 4) {
-      setRoomError(ROOM_ERRORS.notFound);
+      setRoomErrorState(ROOM_ERRORS.notFound);
       return;
     }
+    setRoomPath(normalized);
     connectToRoom(normalized, { guestName: name.trim() || "Player" });
     setAppMode("room");
   }
@@ -262,6 +310,16 @@ export function App() {
           onCreateRoom={handleCreateRoom}
           onJoinRoom={handleJoinRoom}
         />
+      </>
+    );
+  }
+
+  if (appMode === "room" && !roomSnap) {
+    return (
+      <>
+        {chrome}
+        {reconnecting ? <p className="reconnect-banner notice">Reconnecting…</p> : null}
+        <p className="notice">Connecting to room…</p>
       </>
     );
   }

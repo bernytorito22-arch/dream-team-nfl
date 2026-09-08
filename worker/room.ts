@@ -1,10 +1,10 @@
 import { DurableObject } from "cloudflare:workers";
 import leagueJson from "../src/data/league.json";
 import { toRevealBody, SCORE_ERROR } from "../src/ai/client";
-import type { GameState } from "../src/game/engine";
 import type { League, TurnMode } from "../src/league/types";
 import type { ClientMsg, RoomSession, Seat } from "../src/room/protocol";
 import { findSeatByToken, ROOM_ERRORS, toPublicRoom } from "../src/room/protocol";
+import { ROOM_CLOSE_NOT_FOUND } from "../src/room/reconnectPolicy";
 import {
   beginReveal,
   createRoom,
@@ -87,17 +87,20 @@ export class Room extends DurableObject<Env> {
     if (request.headers.get("Upgrade") !== "websocket") {
       return new Response("Expected WebSocket", { status: 426 });
     }
-    if (!this.session || this.session.destroyed) {
-      return new Response(ROOM_ERRORS.notFound, { status: 404 });
-    }
     const pair = new WebSocketPair();
     const client = pair[0];
     const server = pair[1];
     this.ctx.acceptWebSocket(server);
 
+    if (!this.session || this.session.destroyed) {
+      this.sendError(server, ROOM_ERRORS.notFound);
+      server.close(ROOM_CLOSE_NOT_FOUND, ROOM_ERRORS.notFound);
+      return new Response(null, { status: 101, webSocket: client });
+    }
+
     const url = new URL(request.url);
     const tokenFromQuery = url.searchParams.get("token");
-    if (tokenFromQuery && this.session) {
+    if (tokenFromQuery) {
       const re = reconnect(this.session, tokenFromQuery);
       if (re.ok && re.seat) {
         server.serializeAttachment({ seatToken: tokenFromQuery } satisfies WsAttachment);
@@ -278,21 +281,8 @@ export class Room extends DurableObject<Env> {
     }
   }
 
-  async webSocketClose(ws: WebSocket): Promise<void> {
-    const seatToken = this.seatToken(ws);
-    if (!seatToken || !this.session) return;
-
-    if (this.session.phase === "lobby") {
-      const result = leaveLobby(this.session, seatToken);
-      if (!result.ok) return;
-      await this.persist(result.session.destroyed ? null : result.session);
-      if (result.session.destroyed) {
-        for (const sock of this.ctx.getWebSockets()) {
-          if (sock !== ws) this.sendError(sock, ROOM_ERRORS.hostLeft);
-        }
-      } else {
-        this.broadcast(result.session);
-      }
-    }
+  async webSocketClose(_ws: WebSocket): Promise<void> {
+    // Socket drop is not a leave. Seats stay so host and guests can reconnect
+    // in lobby. Explicit `leave` still destroys the room if the host goes Home.
   }
 }

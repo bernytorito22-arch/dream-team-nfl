@@ -1,6 +1,5 @@
 import type { TurnMode } from "../league/types";
 import type { ClientMsg, CreateRoomResponse, PublicRoom, Seat, ServerMsg } from "../room/protocol";
-import { ROOM_ERRORS } from "../room/protocol";
 
 export type RoomSnapshot = {
   you: Seat;
@@ -39,7 +38,7 @@ export function openRoomSocket(
   handlers: {
     onSnapshot: (snap: RoomSnapshot) => void;
     onError: (error: string) => void;
-    onClose: () => void;
+    onClose: (code: number) => void;
     onOpen?: () => void;
   },
   opts?: { token?: string; guestName?: string },
@@ -70,12 +69,8 @@ export function openRoomSocket(
     }
   });
 
-  socket.addEventListener("close", () => {
-    handlers.onClose();
-  });
-
-  socket.addEventListener("error", () => {
-    handlers.onError(ROOM_ERRORS.notFound);
+  socket.addEventListener("close", (event) => {
+    handlers.onClose(event.code);
   });
 
   return {
