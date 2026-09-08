@@ -31,6 +31,7 @@ export function PickScreen(props: {
   onView: (playerId: string) => void;
   onHome: () => void;
   onReset: () => void;
+  canReset?: boolean;
   onLock: (assetId: string, slotId: SlotId, writeIn?: WriteInDraft) => void;
 }) {
   const pid = currentPlayerId(props.state);
@@ -100,6 +101,7 @@ export function PickScreen(props: {
         modeBadge={modeLabel}
         onHome={props.onHome}
         onReset={props.onReset}
+        canReset={props.canReset}
       />
       <section className="pick-showcase bg-team">
         <div className="team-hero">

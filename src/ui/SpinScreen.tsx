@@ -14,7 +14,9 @@ export function SpinScreen(props: {
   onView: (playerId: string) => void;
   onHome: () => void;
   onReset: () => void;
+  canReset?: boolean;
   onSpin: () => void;
+  canSpin?: boolean;
 }) {
   const pid = currentPlayerId(props.state);
   const player = props.state.players.find((p) => p.id === pid)!;
@@ -33,13 +35,14 @@ export function SpinScreen(props: {
         modeBadge={modeLabel}
         onHome={props.onHome}
         onReset={props.onReset}
+        canReset={props.canReset}
       />
       <section className="stage">
         <Wheel
           teams={legal}
           spinning={props.state.spinning}
           onSpin={props.onSpin}
-          spinDisabled={legal.length === 0}
+          spinDisabled={legal.length === 0 || props.canSpin === false}
         />
         {props.state.emptyLegal ? <p className="notice">No legal teams left</p> : null}
         <LowerThird

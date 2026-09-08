@@ -41,6 +41,7 @@ export function RevealScreen(props: {
   assetName: (id: string) => string;
   onHome: () => void;
   onReset: () => void;
+  canReset?: boolean;
   scoring: boolean;
   scoreError: string | null;
   showWhy: boolean;
@@ -62,6 +63,7 @@ export function RevealScreen(props: {
       modeBadge={modeLabel}
       onHome={props.onHome}
       onReset={props.onReset}
+      canReset={props.canReset}
     />
   );
 
@@ -158,9 +160,11 @@ export function RevealScreen(props: {
               Why these records?
             </button>
           ) : null}
-          <button type="button" className="play-again display" onClick={props.onPlayAgain}>
-            Play again
-          </button>
+          {props.canReset !== false ? (
+            <button type="button" className="play-again display" onClick={props.onPlayAgain}>
+              Play again
+            </button>
+          ) : null}
         </div>
       </footer>
     </main>

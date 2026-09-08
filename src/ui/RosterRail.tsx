@@ -23,6 +23,8 @@ export function RosterRail(props: {
   modeBadge?: string;
   onHome: () => void;
   onReset: () => void;
+  canReset?: boolean;
+  readOnly?: boolean;
 }) {
   const team = props.teams.find((t) => t.playerId === props.viewingId) ?? props.teams[0];
   const filled = team?.picks.length ?? 0;
@@ -78,9 +80,11 @@ export function RosterRail(props: {
         <button type="button" className="session-btn" onClick={props.onHome}>
           Home
         </button>
-        <button type="button" className="session-btn" onClick={() => setAsking(true)}>
-          Reset
-        </button>
+        {props.canReset !== false ? (
+          <button type="button" className="session-btn" onClick={() => setAsking(true)}>
+            Reset
+          </button>
+        ) : null}
       </nav>
       {asking ? (
         <div className="confirm-scrim" role="presentation">

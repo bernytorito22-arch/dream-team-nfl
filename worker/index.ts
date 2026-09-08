@@ -1,9 +1,11 @@
-import { SCORE_ERROR } from "../src/ai/client";
-import { parseVerdict } from "../src/ai/parseVerdict";
-import { revealPrompt } from "./prompt";
+import { generateRoomCode } from "../src/room/codes";
+import type { TurnMode } from "../src/league/types";
+import type { Room } from "./room";
+import { handleReveal } from "./revealHttp";
 
 export type Env = {
   ASSETS: { fetch: (request: Request) => Promise<Response> };
+  ROOMS: DurableObjectNamespace<Room>;
   AI: {
     run: (
       model: string,
@@ -19,45 +21,60 @@ export type Env = {
   };
 };
 
-function extractJson(text: string): unknown {
-  const start = text.indexOf("{");
-  const end = text.lastIndexOf("}");
-  if (start < 0 || end < 0)
-    throw new Error(`no json in: ${text.slice(0, 200)}`);
-  return JSON.parse(text.slice(start, end + 1));
+export { Room } from "./room";
+export { handleReveal } from "./revealHttp";
+
+async function handleCreateRoom(request: Request, env: Env): Promise<Response> {
+  if (request.method !== "POST") {
+    return Response.json({ error: "Method not allowed" }, { status: 405 });
+  }
+  const body = (await request.json()) as { name?: string; turnMode?: TurnMode };
+  const hostName = body.name?.trim() || "Player 1";
+  const turnMode: TurnMode = body.turnMode === "snake" ? "snake" : "roundRobin";
+
+  for (let attempt = 0; attempt < 8; attempt++) {
+    const code = generateRoomCode();
+    const id = env.ROOMS.idFromName(code);
+    const stub = env.ROOMS.get(id);
+    const created = await stub.createHost({ code, hostName, turnMode });
+    if (created.ok) {
+      return Response.json({
+        code,
+        playerId: created.playerId,
+        seatToken: created.seatToken,
+      });
+    }
+  }
+  return Response.json({ error: "Could not create room" }, { status: 503 });
 }
 
-export async function handleReveal(request: Request, env: Env): Promise<Response> {
-  if (request.method !== "POST") {
-    return Response.json({ ok: false, error: SCORE_ERROR }, { status: 405 });
-  }
-  try {
-    const body = (await request.json()) as {
-      dreamTeams: { playerId: string; name: string; slots: { slotId: string; assetName: string; teamName: string }[] }[];
-    };
-    const playerIds = body.dreamTeams.map((d) => d.playerId);
-    const result = await env.AI.run("@cf/zai-org/glm-4.7-flash", {
-      messages: [{ role: "user", content: revealPrompt(body.dreamTeams) }],
-      reasoning_effort: "low",
-      max_tokens: 8192,
-    });
-    const raw = String(
-      result.response ?? result.choices?.[0]?.message?.content ?? "",
-    );
-    const verdict = parseVerdict(extractJson(raw), playerIds);
-    return Response.json({ ok: true, verdict });
-  } catch {
-    return Response.json({ ok: false, error: SCORE_ERROR }, { status: 502 });
-  }
+function handleRoomWebSocket(request: Request, env: Env, code: string): Promise<Response> {
+  const id = env.ROOMS.idFromName(code.toUpperCase());
+  const stub = env.ROOMS.get(id);
+  return stub.fetch(request);
 }
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
-    if (url.pathname === "/api/reveal") return handleReveal(request, env);
+
+    if (url.pathname === "/api/reveal") {
+      return handleReveal(request, env);
+    }
+
+    if (url.pathname === "/api/room") {
+      return handleCreateRoom(request, env);
+    }
+
+    const wsMatch = url.pathname.match(/^\/api\/room\/([A-Za-z0-9]{4})\/ws$/);
+    if (wsMatch) {
+      return handleRoomWebSocket(request, env, wsMatch[1]!.toUpperCase());
+    }
+
     const asset = await env.ASSETS.fetch(request);
     const isHtml =
       url.pathname === "/" ||
+      url.pathname.startsWith("/r/") ||
       url.pathname.endsWith(".html") ||
       (asset.headers.get("content-type") ?? "").includes("text/html");
     if (!isHtml) return asset;

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { handleReveal } from "../../worker/index";
+import { handleReveal } from "../../worker/revealHttp";
 import { SCORE_ERROR } from "./client";
 
 const body = {
