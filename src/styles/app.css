@@ -54,14 +54,6 @@
   letter-spacing: 0.08em;
   color: var(--chalk);
 }
-.app-mark {
-  display: block;
-  flex-shrink: 0;
-  width: auto;
-  height: auto;
-  border-radius: 8px;
-  object-fit: cover;
-}
 .mode-badge {
   display: inline-block;
   border: 1px solid var(--gold);
