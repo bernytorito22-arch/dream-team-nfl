@@ -1,7 +1,9 @@
 import { SCORE_ERROR } from "../ai/client";
 import type { GameState } from "../game/engine";
+import { PlayChrome } from "./PlayChrome";
 import { RosterRail } from "./RosterRail";
 import { Stars } from "./Stars";
+import { useCompactLayout } from "./useCompactLayout";
 
 function Medallion(props: { name: string; record: string; winner: boolean }) {
   const rivets = 18;
@@ -51,6 +53,7 @@ export function RevealScreen(props: {
   onTiebreak: () => void;
   onPlayAgain: () => void;
 }) {
+  const compact = useCompactLayout();
   const { state } = props;
   const modeLabel = state.turnMode === "snake" ? "Snake" : "Round robin";
   const rail = (
@@ -69,21 +72,32 @@ export function RevealScreen(props: {
 
   if (state.phase === "revealReady") {
     return (
-      <main className="shell reveal bg-photo bg-reveal">
-        {rail}
-        <div className="reveal-ready">
-          <h1 className="display">All 9 slots filled.</h1>
-          <p className="sub">Ready to see the records?</p>
-          {props.scoreError ? <p className="notice">{props.scoreError}</p> : null}
-          <button
-            className="start-btn display"
-            type="button"
-            disabled={props.scoring}
-            onClick={props.onReveal}
-          >
-            {props.scoring ? "Scoring…" : "Reveal results"}
-          </button>
-        </div>
+      <main
+        className={
+          compact ? "shell reveal is-compact bg-photo bg-reveal" : "shell reveal bg-photo bg-reveal"
+        }
+      >
+        <PlayChrome
+          compact={compact}
+          rail={rail}
+          onHome={props.onHome}
+          onReset={props.onReset}
+          canReset={props.canReset}
+        >
+          <div className="reveal-ready">
+            <h1 className="display">All 9 slots filled.</h1>
+            <p className="sub">Ready to see the records?</p>
+            {props.scoreError ? <p className="notice">{props.scoreError}</p> : null}
+            <button
+              className="start-btn display"
+              type="button"
+              disabled={props.scoring}
+              onClick={props.onReveal}
+            >
+              {props.scoring ? "Scoring…" : "Reveal results"}
+            </button>
+          </div>
+        </PlayChrome>
       </main>
     );
   }
@@ -93,80 +107,94 @@ export function RevealScreen(props: {
   const champName = state.players.find((p) => p.id === champId)?.name ?? "";
   const showChamp = state.phase === "scored" || props.showTiebreak;
 
+  const banner = (
+    <footer className="lower tone-dark reveal-banner">
+      <div className="lower-left">
+        {showChamp ? (
+          <>
+            <h2 className="display">{champName} wins</h2>
+            <p>★★★ Closest to 17-0 ★★★</p>
+          </>
+        ) : (
+          <h2 className="display">Final records</h2>
+        )}
+      </div>
+      <div className="banner-actions">
+        {showChamp ? (
+          <button type="button" className="banner-btn display" onClick={props.onWhy}>
+            Why these records?
+          </button>
+        ) : null}
+        {props.canReset !== false ? (
+          <button type="button" className="play-again display" onClick={props.onPlayAgain}>
+            Play again
+          </button>
+        ) : null}
+      </div>
+    </footer>
+  );
+
   return (
-    <main className="shell reveal bg-photo bg-reveal">
-      {rail}
-      <div className="reveal-stage">
-        <div className="medallion-row">
-          {records.map((r) => {
-            const name = state.players.find((p) => p.id === r.playerId)?.name ?? r.playerId;
-            return (
-              <Medallion
-                key={r.playerId}
-                name={name}
-                record={r.record}
-                winner={showChamp && r.playerId === champId}
-              />
-            );
-          })}
-        </div>
-
-        {state.phase === "tied" && !props.showTiebreak ? (
-          <div className="reveal-actions">
-            <button type="button" className="ghost-btn display" onClick={props.onTiebreak}>
-              Tiebreaker
-            </button>
-          </div>
-        ) : null}
-        {state.phase === "tied" && props.showTiebreak ? (
-          <p className="notice">{state.verdict?.tiebreakLine}</p>
-        ) : null}
-
-        {props.showWhy ? (
-          <div className="why-grid">
+    <main
+      className={
+        compact ? "shell reveal is-compact bg-photo bg-reveal" : "shell reveal bg-photo bg-reveal"
+      }
+    >
+      <PlayChrome
+        compact={compact}
+        rail={rail}
+        footer={banner}
+        onHome={props.onHome}
+        onReset={props.onReset}
+        canReset={props.canReset}
+      >
+        <div className="reveal-stage">
+          <div className="medallion-row">
             {records.map((r) => {
               const name = state.players.find((p) => p.id === r.playerId)?.name ?? r.playerId;
               return (
-                <article key={r.playerId} className="why-card">
-                  <h3>
-                    {name} — {r.record}
-                  </h3>
-                  <p>{r.paragraph}</p>
-                  <p><span className="label">Strength</span> {r.strength}</p>
-                  <p><span className="label">Hole</span> {r.hole}</p>
-                  <p><span className="label">To watch</span> {r.playerToWatch}</p>
-                </article>
+                <Medallion
+                  key={r.playerId}
+                  name={name}
+                  record={r.record}
+                  winner={showChamp && r.playerId === champId}
+                />
               );
             })}
           </div>
-        ) : null}
-        {props.scoreError ? <p className="notice">{SCORE_ERROR}</p> : null}
-      </div>
 
-      <footer className="lower tone-dark reveal-banner">
-        <div className="lower-left">
-          {showChamp ? (
-            <>
-              <h2 className="display">{champName} wins</h2>
-              <p>★★★ Closest to 17-0 ★★★</p>
-            </>
-          ) : (
-            <h2 className="display">Final records</h2>
-          )}
-        </div>
-        <div className="banner-actions">
-          {showChamp ? (
-            <button type="button" className="banner-btn display" onClick={props.onWhy}>
-              Why these records?
-            </button>
+          {state.phase === "tied" && !props.showTiebreak ? (
+            <div className="reveal-actions">
+              <button type="button" className="ghost-btn display" onClick={props.onTiebreak}>
+                Tiebreaker
+              </button>
+            </div>
           ) : null}
-          {props.canReset !== false ? (
-            <button type="button" className="play-again display" onClick={props.onPlayAgain}>
-              Play again
-            </button>
+          {state.phase === "tied" && props.showTiebreak ? (
+            <p className="notice">{state.verdict?.tiebreakLine}</p>
           ) : null}
+
+          {props.showWhy ? (
+            <div className="why-grid">
+              {records.map((r) => {
+                const name = state.players.find((p) => p.id === r.playerId)?.name ?? r.playerId;
+                return (
+                  <article key={r.playerId} className="why-card">
+                    <h3>
+                      {name} — {r.record}
+                    </h3>
+                    <p>{r.paragraph}</p>
+                    <p><span className="label">Strength</span> {r.strength}</p>
+                    <p><span className="label">Hole</span> {r.hole}</p>
+                    <p><span className="label">To watch</span> {r.playerToWatch}</p>
+                  </article>
+                );
+              })}
+            </div>
+          ) : null}
+          {props.scoreError ? <p className="notice">{SCORE_ERROR}</p> : null}
         </div>
-      </footer>
+      </PlayChrome>
     </main>
   );
 }

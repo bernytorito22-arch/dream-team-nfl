@@ -962,33 +962,374 @@
 }
 .confirm-actions button:not(.primary):hover { border-color: var(--gold); color: var(--gold-bright); }
 
-/* ============ RESPONSIVE ============ */
-@media (max-width: 860px) {
-  .pick-shell { grid-template-columns: 1fr; height: auto; max-height: none; overflow: visible; }
-  .pick-showcase { min-height: 28vh; height: auto; padding: 1.25rem 1rem var(--lower-clearance); }
-  .pick-panel { min-height: auto; height: auto; overflow: visible; padding-bottom: var(--lower-clearance); }
-  .shell.reveal { grid-template-columns: 1fr; }
-  .rail-resize,
-  .panel-resize { display: none; }
+/* ============ PHONE TOP BAR + ROSTER SHEET ============ */
+.phone-top {
+  display: none;
 }
-@media (max-width: 720px) {
-  .shell { grid-template-columns: 1fr; }
-  .rail {
-    border-right: 0;
+.phone-turn {
+  display: none;
+}
+.phone-body {
+  display: contents;
+}
+.phone-sheet-scrim,
+.phone-sheet {
+  display: none;
+}
+
+/* ============ RESPONSIVE (phone chrome) ============ */
+@media (max-width: 767px) {
+  .bg-photo {
+    background-attachment: scroll;
+  }
+
+  html,
+  body,
+  #root,
+  .shell,
+  .pick-shell,
+  .stage {
+    min-height: 100dvh;
+  }
+
+  .shell,
+  .pick-shell {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    max-height: 100dvh;
+    overflow: hidden;
+    grid-template-columns: unset;
+    height: auto;
+  }
+
+  .shell.is-compact,
+  .pick-shell.is-compact {
+    max-height: 100dvh;
+  }
+
+  .phone-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    padding: calc(0.55rem + env(safe-area-inset-top, 0px)) 0.75rem 0.55rem;
+    background: rgba(5, 11, 18, 0.94);
     border-bottom: 1px solid var(--line);
-    padding: 4.5rem 1.25rem 1rem;
-    max-height: 220px;
+    z-index: 12;
+  }
+
+  .phone-top-btn {
+    background: transparent;
+    border: 1px solid rgba(201, 162, 39, 0.35);
+    color: var(--gold-bright);
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.45rem 0.65rem;
+    min-height: 44px;
+    min-width: 44px;
+    cursor: pointer;
+  }
+
+  .phone-top-btn.on {
+    background: rgba(201, 162, 39, 0.14);
+    border-color: var(--gold);
+  }
+
+  .phone-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-width: 0;
+  }
+
+  .phone-brand .brand-word {
+    font-size: 0.78rem;
+    white-space: nowrap;
+  }
+
+  .phone-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .phone-turn {
+    display: block;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0.45rem 0.85rem;
+    background: rgba(11, 26, 43, 0.92);
+    border-bottom: 1px solid rgba(201, 162, 39, 0.18);
+    color: var(--muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .phone-turn strong {
+    color: var(--gold-bright);
+    font-weight: 600;
+  }
+
+  .phone-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .phone-sheet-scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    border: 0;
+    padding: 0;
+    background: rgba(3, 7, 12, 0.55);
+    cursor: pointer;
+  }
+
+  .phone-sheet {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 21;
+    max-height: 72dvh;
+    overflow-y: auto;
+    border-top: 1px solid var(--gold);
+    border-radius: 16px 16px 0 0;
+    background: linear-gradient(180deg, rgba(11, 26, 43, 0.98) 0%, rgba(3, 7, 12, 0.98) 100%);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .phone-sheet .rail {
+    position: static;
+    height: auto;
+    max-height: none;
+    border: 0;
+    padding: 1rem 1rem 1.25rem;
+    overflow: visible;
+  }
+
+  .phone-sheet .rail-brand,
+  .phone-sheet .rail-session,
+  .phone-sheet .rail-resize {
+    display: none;
+  }
+
+  .rail-resize,
+  .panel-resize {
+    display: none;
+  }
+
+  .pick-shell.is-compact .pick-showcase {
+    flex-shrink: 0;
+    min-height: 0;
+    height: auto;
+    padding: 0.75rem 1rem 0.5rem;
+  }
+
+  .pick-shell.is-compact .team-hero {
+    max-width: 100%;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .pick-shell.is-compact .team-logo-mark {
+    width: 3.5rem;
+    height: 3.5rem;
+    max-width: 3.5rem;
+    max-height: 3.5rem;
+  }
+
+  .pick-shell.is-compact .team-title {
+    text-align: left;
+  }
+
+  .pick-shell.is-compact .team-city {
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    margin-bottom: 0.1rem;
+  }
+
+  .pick-shell.is-compact .team-name {
+    font-size: 1.45rem;
+  }
+
+  .pick-shell.is-compact .pick-panel {
+    flex: 1;
+    min-height: 0;
+    height: auto;
+    overflow-y: auto;
+    padding: 0.5rem 1rem calc(var(--lower-clearance) + env(safe-area-inset-bottom, 0px));
+    border-left: 0;
+  }
+
+  .pick-shell.is-compact .pick-panel-head h2 {
+    font-size: 1rem;
+  }
+
+  .shell.is-compact .stage {
+    flex: 1;
+    min-height: 0;
+    height: auto;
+    padding: 1rem 1rem calc(var(--lower-clearance) + env(safe-area-inset-bottom, 0px));
+    justify-content: center;
+  }
+
+  .shell.is-compact .wait-stage {
+    min-height: 0;
+    padding: 1.5rem 1rem calc(var(--lower-clearance) + env(safe-area-inset-bottom, 0px));
+  }
+
+  .shell.reveal.is-compact {
+    overflow-y: auto;
+    max-height: none;
+  }
+
+  .shell.reveal.is-compact .phone-body {
     overflow-y: auto;
   }
-  .rail ol { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; }
-  .rail li { border-bottom: 0; padding: 0.3rem 0; }
-  .stage { padding-bottom: 3.6rem; }
-  .lower { padding: 0.7rem 1.1rem; flex-wrap: wrap; gap: 0.5rem; }
-  .lower h2 { font-size: 1rem; }
-  .wheel { width: min(74vw, 340px); }
-  .wheel-pointer { width: 28px; height: 24px; top: -6px; }
-  .setup-card { padding: 12vh 1rem 4rem; }
-  .brand-corner { top: 0.9rem; left: 1rem; }
+
+  .shell.reveal.is-compact .reveal-ready,
+  .shell.reveal.is-compact .reveal-stage {
+    padding: 1.5rem 1rem calc(var(--lower-clearance) + env(safe-area-inset-bottom, 0px));
+    min-height: 0;
+  }
+
+  .lower {
+    position: sticky;
+    bottom: 0;
+    left: auto;
+    right: auto;
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.65rem;
+    padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom, 0px));
+    z-index: 11;
+  }
+
+  .lower-left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .lower .primary {
+    width: 100%;
+    min-height: 44px;
+    font-size: 1rem;
+    padding: 0.65rem 1rem;
+  }
+
+  .wheel {
+    width: min(78vw, 420px);
+  }
+
+  .wheel-pointer {
+    width: 32px;
+    height: 28px;
+    top: -7px;
+  }
+
+  .wheel-hub-spin {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .setup-card {
+    padding: calc(5rem + env(safe-area-inset-top, 0px)) 1rem 4rem;
+  }
+
+  .brand-corner {
+    top: calc(0.75rem + env(safe-area-inset-top, 0px));
+    left: 0.75rem;
+    padding: 0.45rem 0.65rem;
+  }
+
+  .setup-panel {
+    width: min(560px, 100%);
+    padding: 2rem 1.25rem 1.5rem;
+  }
+
+  .setup-tabs {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .setup-tab {
+    min-height: 44px;
+  }
+
+  .mode-box {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .name-field input,
+  .write-in-field select,
+  .write-in-field input {
+    font-size: 16px;
+  }
+
+  .start-btn {
+    width: 100%;
+    max-width: 20rem;
+    padding: 0.95rem 1.5rem;
+    font-size: 1.35rem;
+  }
+
+  .lobby-code {
+    letter-spacing: 0.22em;
+  }
+
+  .lobby-kick {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .medallion-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .reconnect-banner {
+    top: env(safe-area-inset-top, 0px);
+  }
+
+  .confirm-card {
+    max-height: min(90dvh, 520px);
+    overflow-y: auto;
+  }
+
+  .reveal-banner {
+    position: sticky;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.65rem;
+  }
+
+  .banner-actions {
+    flex-wrap: wrap;
+    justify-content: stretch;
+  }
+
+  .banner-btn,
+  .play-again {
+    min-height: 44px;
+  }
 }
 
 /* ============ SETUP TABS / ROOM ============ */

@@ -2,6 +2,7 @@ import { useEffect, useState, type PointerEvent } from "react";
 import { SLOT_DEFS } from "../league/ids";
 import type { DreamTeam, PlayerSetup, SlotId } from "../league/types";
 import { NflMark } from "./NflMark";
+import { ResetConfirm } from "./ResetConfirm";
 
 const RAIL_MIN = 160;
 const RAIL_MAX = 480;
@@ -86,36 +87,14 @@ export function RosterRail(props: {
           </button>
         ) : null}
       </nav>
-      {asking ? (
-        <div className="confirm-scrim" role="presentation">
-          <div
-            className="confirm-card"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="reset-title"
-          >
-            <h2 id="reset-title" className="display">
-              Start over?
-            </h2>
-            <p>This clears every pick and begins a new draft with the same players.</p>
-            <div className="confirm-actions">
-              <button type="button" onClick={() => setAsking(false)}>
-                Cancel
-              </button>
-              <button
-                type="button"
-                className="primary"
-                onClick={() => {
-                  setAsking(false);
-                  props.onReset();
-                }}
-              >
-                Yes, start over
-              </button>
-            </div>
-          </div>
-        </div>
-      ) : null}
+      <ResetConfirm
+        open={asking}
+        onCancel={() => setAsking(false)}
+        onConfirm={() => {
+          setAsking(false);
+          props.onReset();
+        }}
+      />
       {props.modeBadge ? (
         <p className="mode-badge display">{props.modeBadge}</p>
       ) : null}
