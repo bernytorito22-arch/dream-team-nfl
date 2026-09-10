@@ -16,6 +16,17 @@ export function extractModelText(result: unknown): string {
   if (typeof message.content === "string" && message.content.trim()) {
     return message.content;
   }
+  if (Array.isArray(message.content)) {
+    const joined = message.content
+      .map((part) => {
+        if (typeof part === "string") return part;
+        if (isRecord(part) && typeof part.text === "string") return part.text;
+        return "";
+      })
+      .join("")
+      .trim();
+    if (joined) return joined;
+  }
   if (typeof message.reasoning_content === "string") {
     return message.reasoning_content;
   }

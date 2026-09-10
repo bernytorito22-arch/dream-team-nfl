@@ -58,4 +58,12 @@ describe("extractModelText", () => {
       }),
     ).toBe(JSON.stringify(good));
   });
+
+  it("joins Llama-4-style content parts", () => {
+    expect(
+      extractModelText({
+        choices: [{ message: { content: [{ type: "text", text: '{"ok":' }, { type: "text", text: "true}" }] } }],
+      }),
+    ).toBe('{"ok":true}');
+  });
 });
